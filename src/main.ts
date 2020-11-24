@@ -11,19 +11,17 @@ async function run(): Promise<void> {
     const result = re.exec(text);
 
     if (result) {
-      for (const x of result) {
-        const index = result.indexOf(x);
-
+      result.forEach((value, index) => {
         if (index === 10) {
           return;
         }
 
         if (index === 0) {
-          core.setOutput('match', x);
+          core.setOutput('match', value);
           continue;
         }
 
-        core.setOutput(`group${index}`, x);
+        core.setOutput(`group${index}`, value);
       }
     }
   } catch (error) {
